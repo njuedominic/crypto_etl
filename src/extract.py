@@ -20,6 +20,9 @@ def extract_coins_data():
             print(f"Failed to fetch data for {coin_id}. Status code: {response.status_code}")
     return extracted_data
 
-raw_data = extract_coins_data()
-print(f"\nRetrieved {len(raw_data)} records.")
-print(list(raw_data[0].keys()))
+# Test the extraction function
+if __name__ == "__main__":
+    raw_data = extract_coins_data()
+    print(f"Extracted data for {len(raw_data)} coins.")
+    if raw_data:
+        print(list(raw_data[0].keys()))  # Print the keys for the first coin as a sample
