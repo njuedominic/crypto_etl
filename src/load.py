@@ -1,4 +1,4 @@
-import pyscopg2
+
 from src.db_connect import get_db_connection
 
 
