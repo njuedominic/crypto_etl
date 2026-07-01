@@ -1,6 +1,7 @@
 version: '3.8'
 
 services:
+  # background database service
   postgres_db:
     image: postgres:15-alpine
     container_name: crypto_postgres
@@ -13,6 +14,19 @@ services:
       - "${DB_PORT}:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+
+  # The application service
+  etl_pipeline:
+    build: .
+    container_name: crypto_etl_runner
+    depends_on:
+      - postgres_db
+    environment:
+      DB_HOST: postgres_db
+      DB_PORT: 5432
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
 
 volumes:
   pgdata:
